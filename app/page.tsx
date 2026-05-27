@@ -1,65 +1,130 @@
-import Image from "next/image";
+import AccidentRepairSection from "@/components/AccidentRepairSection";
+import CarTypesSection from "@/components/CarTypesSection";
+import ContactsSection from "@/components/ContactsSection";
+import FinalCTA from "@/components/FinalCTA";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import LeadForm from "@/components/LeadForm";
+import MobileStickyCTA from "@/components/MobileStickyCTA";
+import PriceSection from "@/components/PriceSection";
+import ReviewsSection from "@/components/ReviewsSection";
+import ServicesSection from "@/components/ServicesSection";
+import TrustBar from "@/components/TrustBar";
+import WhyChooseSection from "@/components/WhyChooseSection";
+import WorkProcessSection from "@/components/WorkProcessSection";
+import { site } from "@/lib/site-data";
+
+const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL || process.env.SITE_URL || "http://localhost:3000"
+).replace(/\/$/, "");
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": ["AutoRepair", "LocalBusiness"],
+  name: site.name,
+  url: siteUrl,
+  image: `${siteUrl}/images/workshop-hero-industrial.png`,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "ул. 8 Марта, 2",
+    addressLocality: "Подольск",
+    addressRegion: "Московская область",
+    addressCountry: "RU",
+  },
+  telephone: site.phones,
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+      ],
+      opens: "10:00",
+      closes: "20:00",
+    },
+  ],
+  paymentAccepted: site.payments.join(", "),
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "5.0",
+    ratingCount: site.ratingCount,
+    reviewCount: site.reviewCount,
+  },
+  sameAs: [site.yandexMapsUrl],
+  areaServed: ["Подольск", "Ново-Сырово"],
+  makesOffer: [
+    "кузовной ремонт",
+    "покраска авто",
+    "слесарные работы",
+    "диагностика",
+    "ремонт после ДТП",
+    "ремонт бамперов",
+    "антикор",
+    "сервисное обслуживание",
+  ],
+};
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Header />
+      <main className="pb-20 md:pb-0">
+        <Hero />
+        <TrustBar />
+        <ServicesSection />
+        <PriceSection />
+        <AccidentRepairSection />
+        <WorkProcessSection />
+        <WhyChooseSection />
+        <ReviewsSection />
+        <CarTypesSection />
+        <section id="lead" className="premium-surface py-16 md:py-24">
+          <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 md:grid-cols-[0.78fr_1.22fr] md:px-6">
+            <div className="border border-steel-light bg-white p-6 cut-corner md:p-8">
+              <p className="text-sm font-black uppercase tracking-[0.18em] text-signal">
+                Заявка
+              </p>
+              <h2 className="mt-4 text-4xl font-black leading-[1.02] text-carbon md:text-5xl">
+                Сформулируйте задачу для мастера
+              </h2>
+              <p className="mt-5 text-base leading-8 text-brand-muted">
+                Укажите телефон, автомобиль и тип обращения. Если пока не знаете
+                точную причину, просто напишите, что заметили: звук, ошибку,
+                повреждение или поведение машины.
+              </p>
+              <div className="mt-7 grid gap-3 border-t border-steel-light pt-5 text-sm text-brand-muted">
+                <div>
+                  <span className="mono-tabular font-black text-signal">01</span>{" "}
+                  заявка уходит в обработку
+                </div>
+                <div>
+                  <span className="mono-tabular font-black text-signal">02</span>{" "}
+                  мастер уточняет детали
+                </div>
+                <div>
+                  <span className="mono-tabular font-black text-signal">03</span>{" "}
+                  согласовываются работы и детали
+                </div>
+              </div>
+            </div>
+            <LeadForm variant="full" source="main-form" />
+          </div>
+        </section>
+        <ContactsSection />
+        <FinalCTA />
       </main>
-    </div>
+      <Footer />
+      <MobileStickyCTA />
+    </>
   );
 }

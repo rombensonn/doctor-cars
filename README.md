@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Доктор карс - лендинг автосервиса
 
-## Getting Started
+Одностраничный сайт для автосервиса «Доктор карс» в Подольске: кузовной ремонт, покраска, слесарные работы, диагностика, обслуживание и запись на ремонт.
 
-First, run the development server:
+## Стек
+
+- Next.js App Router, TypeScript, Tailwind CSS
+- Framer Motion для мягких появлений блоков
+- React Hook Form + Zod для форм
+- Route Handler `POST /api/lead`
+- SQLite через `better-sqlite3`
+- Telegram Bot API для уведомлений
+
+## Запуск
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Локально сайт будет доступен на `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Production:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+## Переменные окружения
 
-To learn more about Next.js, take a look at the following resources:
+Создайте `.env.local` по примеру `.env.example`:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+TELEGRAM_BOT_TOKEN=
+TELEGRAM_CHAT_ID=
+SITE_URL=https://example.ru
+NEXT_PUBLIC_SITE_URL=https://example.ru
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Если Telegram-переменные не заданы, заявка сохраняется в SQLite, ошибка пишется в серверный лог, а пользователь видит нейтральное сообщение с просьбой позвонить.
 
-## Deploy on Vercel
+## Telegram
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Создайте бота через `@BotFather`.
+2. Скопируйте token в `TELEGRAM_BOT_TOKEN`.
+3. Добавьте бота в нужный чат или напишите ему напрямую.
+4. Получите `chat_id` через `getUpdates` или через отдельного бота для определения ID.
+5. Укажите ID в `TELEGRAM_CHAT_ID`.
+6. Перезапустите Node.js процесс после изменения `.env.local`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Хранение заявок
+
+SQLite-файл создается автоматически:
+
+```text
+data/leads.sqlite
+```
+
+Таблицы:
+
+- `leads` - заявки с сайта и статус Telegram-доставки
+- `lead_attempts` - попытки отправки для rate-limit
+
+## Основные файлы
+
+```text
+app/
+  api/lead/route.ts
+  layout.tsx
+  page.tsx
+  robots.ts
+  sitemap.ts
+  privacy/page.tsx
+  personal-data/page.tsx
+components/
+  Header.tsx
+  Hero.tsx
+  TrustBar.tsx
+  ServicesSection.tsx
+  PriceSection.tsx
+  AccidentRepairSection.tsx
+  WorkProcessSection.tsx
+  WhyChooseSection.tsx
+  ReviewsSection.tsx
+  CarTypesSection.tsx
+  LeadForm.tsx
+  ContactsSection.tsx
+  FinalCTA.tsx
+  Footer.tsx
+  MobileStickyCTA.tsx
+lib/
+  lead-schema.ts
+  rate-limit.ts
+  sqlite.ts
+  telegram.ts
+  site-data.ts
+public/images/
+  hero-workshop.png
+  body-repair.png
+  diagnostics.png
+```
+
+## Перед публикацией
+
+- Заменить `SITE_URL` и `NEXT_PUBLIC_SITE_URL` на реальный домен.
+- Заполнить `TELEGRAM_BOT_TOKEN` и `TELEGRAM_CHAT_ID`.
+- Заменить юридические заглушки `/privacy` и `/personal-data` на финальные документы.
+- Проверить телефон, адрес, график и ссылку на Яндекс Карты.
+- При наличии реальных фотографий сервиса заменить иллюстративные изображения в `public/images`.
+
+## VPS
+
+Минимальный вариант запуска:
+
+```bash
+npm ci
+npm run build
+npm run start
+```
+
+Для постоянного процесса можно использовать PM2:
+
+```bash
+pm2 start npm --name doctor-cars -- run start
+pm2 save
+```
+
+Checklist:
+
+- `npm run lint`
+- `npm run typecheck`
+- `npm run build`
+- тестовая отправка формы
+- проверка `/robots.txt` и `/sitemap.xml`
+- проверка мобильной версии и кликабельных телефонов

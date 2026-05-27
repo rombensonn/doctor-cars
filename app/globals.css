@@ -1,26 +1,135 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #eef2f5;
+  --foreground: #111827;
+  --carbon: #0b1118;
+  --carbon-2: #121a24;
+  --carbon-3: #1c2733;
+  --steel: #6f7d8d;
+  --steel-light: #d7dee6;
+  --paper: #f8fafc;
+  --signal: #f26a21;
+  --signal-dark: #c94f15;
+  --electric: #27a7ff;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-carbon: var(--carbon);
+  --color-carbon-2: var(--carbon-2);
+  --color-carbon-3: var(--carbon-3);
+  --color-steel: var(--steel);
+  --color-steel-light: var(--steel-light);
+  --color-paper: var(--paper);
+  --color-signal: var(--signal);
+  --color-signal-dark: var(--signal-dark);
+  --color-electric: var(--electric);
+  --color-brand-blue: #102b45;
+  --color-brand-blue-dark: #0b1722;
+  --color-brand-orange: var(--signal);
+  --color-brand-graphite: var(--foreground);
+  --color-brand-muted: #5d6b7b;
+  --color-brand-line: var(--steel-light);
+  --font-sans: var(--font-manrope), Arial, "Helvetica Neue", sans-serif;
+  --font-mono: var(--font-jetbrains), "SFMono-Regular", Consolas, monospace;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-manrope), Arial, "Helvetica Neue", sans-serif;
+  text-rendering: geometricPrecision;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: 96px;
+}
+
+::selection {
+  background: var(--signal);
+  color: #ffffff;
+}
+
+input,
+textarea,
+select {
+  font-size: 16px;
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+.premium-surface {
+  background:
+    linear-gradient(180deg, rgba(248, 250, 252, 0.94) 0%, rgba(238, 242, 245, 0.98) 52%, rgba(248, 250, 252, 0.96) 100%);
+}
+
+.cut-corner {
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+}
+
+.mono-tabular {
+  font-family: var(--font-jetbrains), "SFMono-Regular", Consolas, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.focus-industrial {
+  outline: 2px solid transparent;
+  outline-offset: 3px;
+}
+
+.focus-industrial:focus-visible {
+  outline-color: var(--signal);
+  box-shadow: 0 0 0 4px rgba(242, 106, 33, 0.22);
+}
+
+/* Explicit utilities keep the custom industrial palette stable across Tailwind builds. */
+.bg-carbon { background-color: var(--carbon); }
+.bg-carbon-2 { background-color: var(--carbon-2); }
+.bg-carbon-3 { background-color: var(--carbon-3); }
+.bg-paper { background-color: var(--paper); }
+.bg-signal { background-color: var(--signal); }
+.bg-signal-dark { background-color: var(--signal-dark); }
+.bg-steel-light { background-color: var(--steel-light); }
+.bg-carbon\/75 { background-color: rgba(11, 17, 24, 0.75); }
+.bg-carbon\/80 { background-color: rgba(11, 17, 24, 0.8); }
+.bg-carbon\/88 { background-color: rgba(11, 17, 24, 0.88); }
+.bg-carbon\/94 { background-color: rgba(11, 17, 24, 0.94); }
+.bg-carbon-2\/92 { background-color: rgba(18, 26, 36, 0.92); }
+.bg-signal\/10 { background-color: rgba(242, 106, 33, 0.1); }
+.bg-signal\/12 { background-color: rgba(242, 106, 33, 0.12); }
+.text-carbon { color: var(--carbon); }
+.text-signal { color: var(--signal); }
+.border-carbon { border-color: var(--carbon); }
+.border-signal { border-color: var(--signal); }
+.border-steel-light { border-color: var(--steel-light); }
+.shadow-signal\/20 { --tw-shadow-color: rgba(242, 106, 33, 0.2); }
+.hover\:bg-signal-dark:hover { background-color: var(--signal-dark); }
+.hover\:bg-carbon:hover { background-color: var(--carbon); }
+.hover\:bg-carbon-3:hover { background-color: var(--carbon-3); }
+.hover\:border-signal:hover { border-color: var(--signal); }
+.hover\:text-signal:hover { color: var(--signal); }
+.from-carbon { --tw-gradient-from: var(--carbon) var(--tw-gradient-from-position); --tw-gradient-to: rgba(11, 17, 24, 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+.from-carbon\/60 { --tw-gradient-from: rgba(11, 17, 24, 0.6) var(--tw-gradient-from-position); --tw-gradient-to: rgba(11, 17, 24, 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+.from-carbon\/80 { --tw-gradient-from: rgba(11, 17, 24, 0.8) var(--tw-gradient-from-position); --tw-gradient-to: rgba(11, 17, 24, 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+.from-carbon\/85 { --tw-gradient-from: rgba(11, 17, 24, 0.85) var(--tw-gradient-from-position); --tw-gradient-to: rgba(11, 17, 24, 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+.via-carbon\/25 { --tw-gradient-via: rgba(11, 17, 24, 0.25) var(--tw-gradient-via-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-via), var(--tw-gradient-to); }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
