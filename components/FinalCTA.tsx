@@ -1,13 +1,14 @@
 import Image from "next/image";
 import { MessageSquareText, Phone } from "lucide-react";
 
+import { assetPath } from "@/lib/asset-path";
 import { site } from "@/lib/site-data";
 
 export default function FinalCTA() {
   return (
     <section className="relative overflow-hidden bg-carbon py-16 text-white md:py-24">
       <Image
-        src="/images/final-cta-tools.png"
+        src={assetPath("/images/final-cta-tools.png")}
         alt="Инструменты и кузовная деталь на рабочем столе автосервиса"
         fill
         sizes="100vw"

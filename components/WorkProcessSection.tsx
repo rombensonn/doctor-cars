@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { assetPath } from "@/lib/asset-path";
 import Reveal from "./Reveal";
 
 const steps = [
@@ -48,7 +49,7 @@ export default function WorkProcessSection() {
         <div className="mt-10 grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
           <Reveal className="relative min-h-[420px] overflow-hidden bg-carbon">
             <Image
-              src="/images/repair-process.png"
+              src={assetPath("/images/repair-process.png")}
               alt="Мастер и клиент обсуждают ремонт автомобиля у кузовного элемента"
               fill
               sizes="(min-width: 1024px) 40vw, 100vw"

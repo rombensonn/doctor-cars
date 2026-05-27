@@ -1,14 +1,15 @@
 import Image from "next/image";
 import { ArrowUpRight, Check, Gauge, PanelsTopLeft } from "lucide-react";
 
+import { assetPath } from "@/lib/asset-path";
 import { serviceCategories } from "@/lib/site-data";
 import Reveal from "./Reveal";
 
 const images = [
-  "/images/paint-bay-detail.png",
-  "/images/diagnostics-tablet.png",
-  "/images/final-cta-tools.png",
-  "/images/repair-process.png",
+  assetPath("/images/paint-bay-detail.png"),
+  assetPath("/images/diagnostics-tablet.png"),
+  assetPath("/images/final-cta-tools.png"),
+  assetPath("/images/repair-process.png"),
 ];
 
 const labels = ["Кузов", "Слесарка", "ТО", "Детали"];

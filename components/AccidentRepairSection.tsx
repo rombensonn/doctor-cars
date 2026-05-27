@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ArrowRight, CheckCircle2, ClipboardCheck, Paintbrush, ShieldCheck } from "lucide-react";
 
+import { assetPath } from "@/lib/asset-path";
 import Reveal from "./Reveal";
 
 const works = [
@@ -38,7 +39,7 @@ export default function AccidentRepairSection() {
           <div className="grid lg:grid-cols-[0.95fr_1.05fr]">
             <Reveal className="relative min-h-[420px] overflow-hidden lg:min-h-[720px]">
               <Image
-                src="/images/paint-bay-detail.png"
+                src={assetPath("/images/paint-bay-detail.png")}
                 alt="Подготовка кузовной детали к ремонту и покраске"
                 fill
                 sizes="(min-width: 1024px) 48vw, 100vw"

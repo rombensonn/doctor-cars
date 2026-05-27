@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ArrowRight, CalendarClock, MapPin, Phone, Star, Wrench } from "lucide-react";
 
+import { assetPath } from "@/lib/asset-path";
 import { site } from "@/lib/site-data";
 import LeadForm from "./LeadForm";
 import Reveal from "./Reveal";
@@ -15,7 +16,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-[92svh] overflow-hidden bg-carbon pt-24 text-white">
       <Image
-        src="/images/workshop-hero-industrial.png"
+        src={assetPath("/images/workshop-hero-industrial.png")}
         alt="Индустриальный автосервис: мастер проверяет кузовной элемент автомобиля"
         fill
         priority

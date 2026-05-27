@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { CreditCard, ExternalLink, MapPin, Phone, Route } from "lucide-react";
 
+import { assetPath } from "@/lib/asset-path";
 import { site } from "@/lib/site-data";
 import Reveal from "./Reveal";
 
@@ -11,7 +12,7 @@ export default function ContactsSection() {
         <div className="grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
           <Reveal className="relative min-h-[520px] overflow-hidden bg-carbon">
             <Image
-              src="/images/contact-workshop-front.png"
+              src={assetPath("/images/contact-workshop-front.png")}
               alt="Нейтральный вид современного автосервисного здания и парковки"
               fill
               sizes="(min-width: 1024px) 55vw, 100vw"
